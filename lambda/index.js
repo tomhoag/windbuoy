@@ -21,9 +21,7 @@ var request = require('request');
 			console.log(response.statusCode);
 			json = json.concat('"response code":' + response.statusCode + ', ');
 			json = json.concat('"data": []}');
-			console.log(json);
-			json = JSON.parse(json);
-			context.done(null,json);
+
   		} else {
 		
 			// The first two lines are the measurment type and units
@@ -48,9 +46,9 @@ var request = require('request');
 		
 			json = json.slice(0,-1); // slice off the last comma 
 			json = json.concat("]}"); // close the data and json
-			json = JSON.parse(json); // parse to remove the escaped "
-		
-			context.succeed(json);
 		}
+
+		json = JSON.parse(json); // parse to remove the escaped "
+		context.succeed(json);
 	});
 };
